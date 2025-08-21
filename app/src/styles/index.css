@@ -1,1 +1,17 @@
 @import "tailwindcss";
+
+@theme {
+  --color-brand-gray: #EBEBEB;
+  --color-brand-white: #FFFFFF;
+  --color-brand-black: #000000;
+  --color-button-normal: #E7FFE9;
+  --color-button-edit: #A1FFC7;
+  --color-button-hover: #81F8B1;
+}
+
+/* Your global SCSS overrides */
+body {
+  font-family: 'Inter', sans-serif; /* Clean, modern font */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
