@@ -32,7 +32,7 @@ npm install
 This command can start the Vite development server and the Electron app with hot-reloading enabled:
 
 ```bash
-npm run electron:dev
+npm run dev
 ```
 
 ### 3. Build for Production
@@ -40,7 +40,7 @@ npm run electron:dev
 To create a distributable version of the app, run:
 
 ```bash
-npm run electron:build
+npm run build
 ```
 
 The final files will be generated in the `/dist` and `/dist-electron` directories.
