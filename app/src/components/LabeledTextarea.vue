@@ -2,7 +2,7 @@
   <div class="w-full">
     <label 
       :for="id" 
-      class="block mb-2 text-xl font-normal text-brand-black"
+      class="block text-xl font-normal text-brand-black"
     >
       {{ label }}
     </label>

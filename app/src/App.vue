@@ -1,12 +1,5 @@
 <template>
-  <main class="flex flex-col items-center justify-start min-h-screen bg-brand-white space-y-8 p-12">
-    
-    <!-- Previous Button Components -->
-    <div class="flex space-x-4">
-      <BaseButton>Btn</BaseButton>
-      <BaseButton variant="hover">Hover</BaseButton>
-      <BaseButton disabled>Disable</BaseButton>
-    </div>
+  <main class="flex flex-col items-center justify-start min-h-screen space-y-8 p-12">
     
     <!-- LabeledInput Component -->
     <div class="w-full max-w-2xl">
@@ -18,14 +11,23 @@
       />
     </div>
 
-    <!-- New LabeledTextarea Component -->
+    <!-- LabeledTextarea Component -->
     <div class="w-full max-w-2xl">
       <LabeledTextarea
         id="item-content"
         label="Content"
         placeholder="content..."
         v-model="itemContent"
-        :max-length="200"
+      />
+    </div>
+
+    <!-- New LabeledDatePicker Component -->
+    <div class="w-full max-w-2xl">
+      <LabeledDatePicker
+        id="task-date-range"
+        label="Date"
+        v-model:startDate="startDate"
+        v-model:endDate="endDate"
       />
     </div>
 
@@ -34,11 +36,13 @@
 
 <script setup>
 import { ref } from 'vue';
-import BaseButton from './components/BaseButton.vue';
 import LabeledInput from './components/LabeledInput.vue';
 import LabeledTextarea from './components/LabeledTextarea.vue';
+import LabeledDatePicker from './components/LabeledDatePicker.vue'; 
 
-// 2. Create reactive variables
+// Create reactive variables for our components
 const newItemTitle = ref('');
-const itemContent = ref(''); // Variable for our new textarea
+const itemContent = ref('');
+const startDate = ref(null); // 2. Refs for the date range
+const endDate = ref(null);
 </script>
