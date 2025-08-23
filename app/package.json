@@ -9,8 +9,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@heroicons/vue": "^2.2.0",
     "pinia": "^3.0.3",
-    "vue": "^3.4.21"
+    "uuid": "^11.1.0",
+    "vue": "^3.4.21",
+    "vue-router": "^4.5.1"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.1.12",
