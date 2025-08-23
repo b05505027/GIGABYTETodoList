@@ -8,7 +8,6 @@
     <div class="flex items-center space-x-4">
       <!-- Start Date Picker -->
       <div class="relative">
-        <!-- CHANGE THIS DIV TO A LABEL -->
         <label
           :for="id + '-start'"
           @click.prevent="openStart"
@@ -36,7 +35,6 @@
 
       <!-- End Date Picker -->
       <div class="relative">
-        <!-- ALSO CHANGE THIS DIV TO A LABEL -->
         <label
           :for="id + '-end'"
           class="

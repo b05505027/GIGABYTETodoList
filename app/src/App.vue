@@ -1,48 +1,45 @@
 <template>
-  <main class="flex flex-col items-center justify-start min-h-screen space-y-8 p-12">
-    
-    <!-- LabeledInput Component -->
-    <div class="w-full max-w-2xl">
-      <LabeledInput
-        id="item-title-input"
-        label="Title"
-        placeholder="new item title"
-        v-model="newItemTitle"
-      />
+  <main class="grid grid-cols-4 min-h-screen">
+    <!-- Sidebar Column -->
+    <div class="col-span-1 bg-brand-gray space-y-2">
+      <h2 class="text-xl font-bold p-2 mb-2">My Items</h2>
+      
+      <SidebarButton
+        :selected="selectedItem === 1"
+        @click="selectedItem = 1"
+      >
+        1. Item title
+      </SidebarButton>
+      
+      <SidebarButton
+        :selected="selectedItem === 2"
+        @click="selectedItem = 2"
+      >
+        2. new item title
+      </SidebarButton>
+
+      <SidebarButton
+        :selected="selectedItem === 3"
+        @click="selectedItem = 3"
+      >
+        3. Another item
+      </SidebarButton>
     </div>
 
-    <!-- LabeledTextarea Component -->
-    <div class="w-full max-w-2xl">
-      <LabeledTextarea
-        id="item-content"
-        label="Content"
-        placeholder="content..."
-        v-model="itemContent"
-      />
+    <!-- Main Content Column -->
+    <div class="col-span-3 bg-brand-white p-12">
+      <h1 class="text-4xl font-bold mb-8">Component Display Area</h1>
+      <p class="text-lg text-gray-600">
+        Click the items in the sidebar to see the selected state change.
+      </p>
     </div>
-
-    <!-- New LabeledDatePicker Component -->
-    <div class="w-full max-w-2xl">
-      <LabeledDatePicker
-        id="task-date-range"
-        label="Date"
-        v-model:startDate="startDate"
-        v-model:endDate="endDate"
-      />
-    </div>
-
   </main>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import LabeledInput from './components/LabeledInput.vue';
-import LabeledTextarea from './components/LabeledTextarea.vue';
-import LabeledDatePicker from './components/LabeledDatePicker.vue'; 
+import SidebarButton from './components/SidebarButton.vue'; // 1. Import component
 
-// Create reactive variables for our components
-const newItemTitle = ref('');
-const itemContent = ref('');
-const startDate = ref(null); // 2. Refs for the date range
-const endDate = ref(null);
+// 2. Create a reactive variable to track the selected item
+const selectedItem = ref(1); // Default to the first item being selected
 </script>
