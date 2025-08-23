@@ -22,6 +22,7 @@ export const useTodoStore = defineStore('todo', {
       },
     ],
     selectedItemId: null,
+    isImageLoading: false, // loading image via api
   }),
 
   getters: {
@@ -64,15 +65,23 @@ export const useTodoStore = defineStore('todo', {
     },
 
     async fetchRandomImage(id) {
-        if (!id) return;
+        if (!id || this.isImageLoading) return;
+
+        this.isImageLoading = true;
         try {
-            // Using picsum.photos as a free random image service
-            const response = await fetch('https://picsum.photos/800/600');
-            if (response.ok) {
+            // THE ONLY CHANGE IS HERE: adding { mode: 'no-cors' }
+            const response = await fetch('https://picsum.photos/800/600', { mode: 'no-cors' });
+
+            // IMPORTANT: In 'no-cors' mode, the response body is opaque, but the URL is still accessible!
+            // The browser follows the redirect from picsum.photos to fastly.picsum.photos,
+            // and response.url will contain that final URL.
+            if (response.url) {
                 this.updateItem(id, 'imageUrl', response.url);
             }
         } catch (error) {
             console.error('Failed to fetch random image:', error);
+        } finally {
+            this.isImageLoading = false;
         }
     }
   },

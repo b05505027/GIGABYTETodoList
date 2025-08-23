@@ -3,9 +3,9 @@
     :disabled="disabled"
     class="
       px-6 
-      py-6 
-      rounded-2xl
-      font-sans text-4xl font-normal text-brand-black
+      py-4
+      rounded-xl
+      font-sans text-xl font-normal text-brand-black
       bg-button-normal
       transition-colors duration-200 ease-in-out
       focus:outline-none focus:ring-2 focus:ring-offset-2

@@ -5,16 +5,16 @@
     >
       {{ label }}
     </label>
-    <div class="flex items-center space-x-4">
+    <div class="flex justify-between items-center space-x-2">
       <!-- Start Date Picker -->
-      <div class="relative">
+      <div class="relative flex-2">
         <label
           :for="id + '-start'"
           @click.prevent="openStart"
           class="
             block bg-brand-gray rounded-xl text-brand-black  z-10
             text-xl text-center font-sans
-            px-10 py-3 cursor-pointer
+            px-2 py-4 cursor-pointer
             focus-within:ring-2 focus-within:ring-mint-active
           "
         >
@@ -34,13 +34,13 @@
       <span class="text-3xl text-brand-black">~</span>
 
       <!-- End Date Picker -->
-      <div class="relative">
+      <div class="relative flex-2">
         <label
           :for="id + '-end'"
           class="
             block bg-brand-gray rounded-xl text-brand-black 
             text-xl text-center font-sans
-            px-10 py-3 cursor-pointer select-none
+            px-x py-4 cursor-pointer select-none
             focus-within:ring-2 focus-within:ring-mint-active
           "
         >

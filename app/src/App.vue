@@ -1,45 +1,44 @@
 <template>
-  <main class="grid grid-cols-4 min-h-screen">
-    <!-- Sidebar Column -->
-    <div class="col-span-1 bg-brand-gray space-y-2">
-      <h2 class="text-xl font-bold p-2 mb-2">My Items</h2>
-      
-      <SidebarButton
-        :selected="selectedItem === 1"
-        @click="selectedItem = 1"
-      >
-        1. Item title
-      </SidebarButton>
-      
-      <SidebarButton
-        :selected="selectedItem === 2"
-        @click="selectedItem = 2"
-      >
-        2. new item title
-      </SidebarButton>
+  <div class="h-screen w-screen flex antialiased text-gray-800 bg-white">
+    <!-- Mobile Header -->
+    <header class="md:hidden flex justify-between items-center p-4 border-b w-full fixed top-0 bg-white z-20">
+      <button @click="isSidebarOpen = true">
+        <Bars3Icon class="h-8 w-8" />
+      </button>
+      <div v-if="$route.path !== '/content'">
+        <TrashIcon @click="requestDelete" class="h-8 w-8 text-gray-400 hover:text-red-500" />
+      </div>
+    </header>
 
-      <SidebarButton
-        :selected="selectedItem === 3"
-        @click="selectedItem = 3"
-      >
-        3. Another item
-      </SidebarButton>
+    <!-- Sidebar -->
+    <!-- Mobile: Absolute overlay -->
+    <div :class="['fixed inset-0 z-30 transition-transform transform md:hidden', isSidebarOpen ? 'translate-x-0' : '-translate-x-full']">
+      <Sidebar @close="isSidebarOpen = false" />
     </div>
 
-    <!-- Main Content Column -->
-    <div class="col-span-3 bg-brand-white p-12">
-      <h1 class="text-4xl font-bold mb-8">Component Display Area</h1>
-      <p class="text-lg text-gray-600">
-        Click the items in the sidebar to see the selected state change.
-      </p>
+    <!-- Desktop: Fixed 240px sidebar -->
+    <div class="hidden md:flex" style="width: 240px; min-width: 240px;">
+      <Sidebar />
     </div>
-  </main>
+
+    <!-- Main Content -->
+    <main class="flex-1 pt-20 md:pt-0">
+      <RouterView :key="$route.fullPath" ref="contentView" />
+    </main>
+  </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import SidebarButton from './components/SidebarButton.vue'; // 1. Import component
+import { Bars3Icon, TrashIcon } from '@heroicons/vue/24/solid';
+import Sidebar from './components/Sidebar.vue';
 
-// 2. Create a reactive variable to track the selected item
-const selectedItem = ref(1); // Default to the first item being selected
+const isSidebarOpen = ref(false);
+const contentView = ref(null);
+
+const requestDelete = () => {
+  if (contentView.value && typeof contentView.value.handleDeleteItem === 'function') {
+    contentView.value.handleDeleteItem();
+  }
+};
 </script>

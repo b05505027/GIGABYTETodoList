@@ -5,9 +5,10 @@
   --color-brand-white: #FFFFFF;
   --color-brand-black: #000000;
   --color-button-normal: #E7FFE9;
-  --color-button-edit: #A1FFC7;
+  --color-sidebar-background: #A1FFC7;
   --color-button-hover: #81F8B1;
   --color-placeholder-gray: #A1A1A1;
+  --color-sidebar-add-item: #E6FFE9;
 }
 
 /* Your global SCSS overrides */
