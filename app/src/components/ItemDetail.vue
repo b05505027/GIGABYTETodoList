@@ -24,11 +24,13 @@
                 <span class="block text-center text-gray-500">or</span>
                 <BaseInput placeholder="請輸入圖片網址" :modelValue="item.imageUrl" @update:modelValue="update('imageUrl', $event)" />
             </div>
-            <img v-if="item.imageUrl" :src="item.imageUrl" class="w-full h-40 object-cover rounded-lg" alt="Image Preview" />
+            <div>
+              <img @error="todoStore.handleImageError" @load="todoStore.handleImageLoad" v-if="item.imageUrl" :src="item.imageUrl" class="w-full h-40 object-cover rounded-lg" />
+            </div>
         </div>
       </div>
       
-      <LabeledTextarea id="content" label="Content" placeholder="content..." :maxLength="500" :modelValue="item.content" @update:modelValue="update('content', $event)" />
+      <LabeledTextarea id="content" label="Content" placeholder="content..." :maxLength="200" :modelValue="item.content" @update:modelValue="update('content', $event)" />
     </div>
   </div>
 </template>

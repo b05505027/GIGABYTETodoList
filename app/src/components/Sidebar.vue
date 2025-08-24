@@ -33,16 +33,17 @@
           :class="{ 'cursor-wait': todoStore.isImageLoading }"
           @click="todoStore.fetchRandomImage(todoStore.selectedItemId)"
         >
+          <div v-if="todoStore.selectedItem.imageUrl">
           <img 
-            v-if="todoStore.selectedItem.imageUrl"
+            @error="todoStore.handleImageError"
+            @load="todoStore.handleImageLoad"
             :src="todoStore.selectedItem.imageUrl" 
-            alt="Preview" 
-            class="w-full h-full object-cover rounded-xl transition-opacity"
-            :class="{ 'opacity-50': todoStore.isImageLoading }"
-          >
+            class="w-full h-full object-cover rounded-xl"
+          ></img>
+          </div>
           <div v-else class="text-xl">no image</div>
           <!-- Loading Overlay -->
-          <div v-if="todoStore.isImageLoading" class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-lg">
+          <div v-if="todoStore.isImageLoading" class="absolute inset-0 flex items-center justify-center bg-black opacity-50 rounded-lg">
             <!-- Simple SVG Spinner -->
             <svg class="animate-spin h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
               <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>

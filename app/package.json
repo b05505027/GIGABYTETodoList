@@ -4,9 +4,18 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc && vite build && electron-builder",
-    "preview": "vite preview"
+    "dev:renderer": "vite",
+    "dev:main": "esbuild electron/main.ts --bundle --platform=node --external:electron --outfile=dist-electron/main/index.js --sourcemap --watch",
+    "dev:preload": "esbuild electron/preload.ts --bundle --platform=browser --external:electron --outfile=dist-electron/preload/index.js --sourcemap --watch",
+    "dev:electron": "wait-on tcp:5173 && electronmon .",
+    "dev": "concurrently -k \"npm:dev:renderer\" \"npm:dev:main\" \"npm:dev:preload\" \"npm:dev:electron\"",
+    "build:renderer": "vite build",
+    "build:main": "esbuild electron/main.ts --bundle --platform=node --external:electron --outfile=dist-electron/main/index.js --sourcemap",
+    "build:preload": "esbuild electron/preload.ts --bundle --platform=browser --external:electron --outfile=dist-electron/preload/index.js --sourcemap",
+    "pack": "npm run build:renderer && npm run build:main && npm run build:preload",
+    "dist:mac": "npm run pack && electron-builder --mac",
+    "dist:win": "npm run pack && electron-builder --win",
+    "dist": "npm run pack && electron-builder -m -w"
   },
   "dependencies": {
     "@heroicons/vue": "^2.2.0",
@@ -19,15 +28,67 @@
     "@tailwindcss/cli": "^4.1.12",
     "@tailwindcss/vite": "^4.1.12",
     "@vitejs/plugin-vue": "^5.0.4",
+    "concurrently": "^9.2.0",
     "electron": "^30.0.1",
     "electron-builder": "^24.13.3",
+    "electronmon": "^2.0.3",
+    "esbuild": "^0.25.9",
     "sass": "^1.90.0",
     "tailwindcss": "^4.1.12",
     "typescript": "^5.2.2",
     "vite": "^5.1.6",
     "vite-plugin-electron": "^0.28.6",
     "vite-plugin-electron-renderer": "^0.14.5",
-    "vue-tsc": "^2.0.26"
+    "vue-tsc": "^2.0.26",
+    "wait-on": "^8.0.4"
   },
-  "main": "dist-electron/main.js"
+  "main": "dist-electron/main.js",
+  "build": {
+    "appId": "b05505027.todolist",
+    "productName": "GIGABYTETodoList",
+    "files": [
+      "dist/**",
+      "dist-electron/**",
+      "!node_modules/.cache/**"
+    ],
+    "asar": true,
+    "directories": {
+      "buildResources": "build"
+    },
+    "mac": {
+      "target": [
+        "zip"
+      ],
+      "category": "public.app-category.productivity",
+      "hardenedRuntime": true,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist",
+      "artifactName": "${productName}-${version}-mac-${arch}.${ext}"
+    },
+    "dmg": {
+      "sign": false
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "${productName}-${version}-win-${arch}.${ext}"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": false
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ]
+    },
+    "extraResources": []
+  }
 }

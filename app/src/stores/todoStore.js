@@ -88,6 +88,14 @@ export const useTodoStore = defineStore('todo', {
       } finally {
           this.isImageLoading = false;
       }
+    },
+    handleImageError(event) {
+      event.target.style.opacity = '0' // Hide the broken image
+      event.target.parentElement.classList.add('bg-brand-gray', 'rounded-lg')
+    },
+    handleImageLoad(event)  {
+      event.target.parentElement.classList.remove('bg-brand-gray', 'rounded-lg')
+      event.target.style.opacity = '1' // Show the loaded image
     }
   },
 });
