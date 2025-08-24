@@ -4,8 +4,8 @@ import EmptyState from '../components/EmptyState.vue';
 
 const routes = [
   { 
-    path: '/', 
-    redirect: '/content' // Redirect root to a default view
+    path: '/:pathMatch(.*)*', 
+    redirect: '/content', // Redirect root to a default view
   },
   {
     path: '/content',

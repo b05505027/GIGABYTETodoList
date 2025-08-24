@@ -39,7 +39,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { Bars3Icon, TrashIcon } from '@heroicons/vue/24/solid';
 import Sidebar from './components/Sidebar.vue';
 
