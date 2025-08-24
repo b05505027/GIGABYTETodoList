@@ -10,14 +10,14 @@
     <!-- Form -->
     <div class="space-y-6">
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+     <div class="grid grid-cols-1 md:[grid-template-columns:1fr_minmax(265px,1fr)] gap-8 items-center">
       <LabeledInput id="title" label="Title" placeholder="new item title" :modelValue="item.title" @update:modelValue="update('title', $event)" />
-      
+
       <LabeledDatePicker id="date" label="Date" :startDate="item.startDate" @update:startDate="update('startDate', $event)" :endDate="item.endDate" @update:endDate="update('endDate', $event)" />
       </div>
       <div>
         <label class="block mb-2 text-xl font-medium text-brand-black">Image</label>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <div class="grid grid-cols-1 md:[grid-template-columns:1fr_minmax(265px,1fr)] gap-8 items-center">
             <div class="space-y-2">
                 <BaseButton @click="triggerFileUpload" class="w-full">Upload Image</BaseButton>
                 <input type="file" ref="fileInput" @change="handleImageUpload" class="hidden" accept="image/*" />

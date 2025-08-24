@@ -2,15 +2,15 @@
   <aside class="w-64 bg-sidebar-background text-brand-black flex flex-col h-full">
     <div class="flex-shrink-0"> <!-- Header container -->
       <div class="flex justify-between items-center">
-        <h1 class="text-xl font-bold py-4 px-6">Demo Todo List</h1>
-        <button @click="$emit('close')" class="md:hidden p-4">
+        <h1 class="text-xl font-bold py-4 pl-4">Demo Todo List</h1>
+        <button @click="$emit('close')" class="md:opacity-0 p-4">
           <XMarkIcon class="h-8 w-8" />
         </button>
       </div>
     </div>
 
     <!-- Scrollable Item List -->
-    <div class="flex-grow space-y-1 overflow-y-auto">
+    <div class="space-y-1 overflow-y-auto max-h-[65%]">
       <RouterLink v-for="item in todoStore.items" :key="item.id" :to="`/content/${item.id}`" custom v-slot="{ navigate, isActive }">
         <SidebarButton :selected="isActive" @click="navigate">
           {{ item.title }}
@@ -18,12 +18,13 @@
       </RouterLink>
     </div>
 
+    <div class="flex-grow p-4">
+        <BaseButton @click="handleAddItem" class="small-button-padding w-full bg-button-normal hover:bg-button-hover">Add Item</BaseButton>
+    </div>
+
+
     <!-- Bottom Section (Add Button & Image Preview) -->
     <div class="flex-shrink-0"> <!-- Bottom container -->
-      <div class="p-4">
-        <BaseButton @click="handleAddItem" class="small-button-padding w-full bg-button-normal hover:bg-button-hover">Add Item</BaseButton>
-      </div>
-
       <div  class="mt-4 p-6">
         <!-- IMAGE PREVIEW WITH LOADING STATE -->
         <div 
