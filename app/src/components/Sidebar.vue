@@ -1,5 +1,5 @@
 <template>
-  <aside class="w-64 bg-sidebar-background text-brand-black flex flex-col h-full">
+  <aside class="w-[240px] bg-sidebar-background text-brand-black flex flex-col h-full">
     <div class="flex-shrink-0"> <!-- Header container -->
       <div class="flex justify-between items-center">
         <h1 class="text-xl font-bold py-4 pl-4">Demo Todo List</h1>

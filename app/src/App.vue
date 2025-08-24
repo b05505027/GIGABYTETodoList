@@ -20,12 +20,12 @@
 
     <!-- Sidebar -->
     <!-- Mobile: Absolute overlay -->
-    <div :class="['fixed inset-0 z-30 transition-transform transform md:hidden', isSidebarOpen ? 'translate-x-0' : '-translate-x-full']">
+    <div sylte="width:240px;" :class="['fixed inset-0 z-30 transition-transform transform md:hidden', isSidebarOpen ? 'translate-x-0' : '-translate-x-full']">
       <Sidebar @close="isSidebarOpen = false" />
     </div>
 
     <!-- Desktop: Fixed 240px sidebar -->
-    <div class="hidden md:flex" style="width: 240px; min-width: 240px;">
+    <div class="hidden md:flex" style="width: 240px;">
       <Sidebar />
     </div>
 

@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white">
+    <div class="bg-white w-[240px]">
       <button
         :class="[
           'w-full text-left h-14 px-6 py-3 text-xl transition-all duration-200 ease-in-out',
@@ -10,7 +10,8 @@
           }
     ]"
   >
-    <slot />
+  <span class="block truncate"><slot /></span>
+
   </button>
 </div>
 </template>
