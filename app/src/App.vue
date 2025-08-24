@@ -1,7 +1,7 @@
 <template>
   <div class="h-screen w-screen flex antialiased text-gray-800 bg-white">
     <!-- Mobile Header -->
-    <header class="md:hidden flex justify-between items-center p-4 border-b w-full fixed top-0 bg-white z-20">
+    <header class="md:hidden flex justify-between items-center p-4 w-full fixed top-0 bg-white z-20">
       <button @click="isSidebarOpen = true">
         <Bars3Icon class="h-8 w-8" />
       </button>
@@ -23,7 +23,9 @@
 
     <!-- Main Content -->
     <main class="flex-1 pt-20 md:pt-0">
-      <RouterView :key="$route.fullPath" ref="contentView" />
+      <RouterView :key="$route.fullPath" v-slot="{ Component }">
+        <Component :is="Component" ref="contentView"/>
+      </RouterView>
     </main>
   </div>
 </template>
@@ -37,7 +39,10 @@ const isSidebarOpen = ref(false);
 const contentView = ref(null);
 
 const requestDelete = () => {
+  alert('hello')
+  console.log(contentView.value.handleDeleteItem)
   if (contentView.value && typeof contentView.value.handleDeleteItem === 'function') {
+    alert('request delet')
     contentView.value.handleDeleteItem();
   }
 };

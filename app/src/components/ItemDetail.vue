@@ -88,4 +88,6 @@ const handleImageUpload = (event) => {
         update('imageUrl', localUrl);
     }
 };
+
+defineExpose({ handleDeleteItem });
 </script>
