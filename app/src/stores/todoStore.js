@@ -65,24 +65,29 @@ export const useTodoStore = defineStore('todo', {
     },
 
     async fetchRandomImage(id) {
-        if (!id || this.isImageLoading) return;
+      if (!id || this.isImageLoading) return;
 
-        this.isImageLoading = true;
-        try {
-            // THE ONLY CHANGE IS HERE: adding { mode: 'no-cors' }
-            const response = await fetch('https://picsum.photos/800/600', { mode: 'no-cors' });
-
-            // IMPORTANT: In 'no-cors' mode, the response body is opaque, but the URL is still accessible!
-            // The browser follows the redirect from picsum.photos to fastly.picsum.photos,
-            // and response.url will contain that final URL.
-            if (response.url) {
-                this.updateItem(id, 'imageUrl', response.url);
+      this.isImageLoading = true;
+      try {
+        const response = await fetch(
+            'https://api.pexels.com/v1/curated?per_page=1&page=' + Math.floor(Math.random() * 100),
+            {
+                headers: {
+                    Authorization: import.meta.env.VITE_PEXELS_API_KEY,
+                },
             }
-        } catch (error) {
-            console.error('Failed to fetch random image:', error);
-        } finally {
-            this.isImageLoading = false;
+        );
+
+        const data = await response.json();
+        if (data.photos?.length > 0) {
+            const imageUrl = data.photos[0].src.medium;
+            this.updateItem(id, 'imageUrl', imageUrl);
         }
+      } catch (error) {
+          console.error('Failed to fetch image:', error);
+      } finally {
+          this.isImageLoading = false;
+      }
     }
   },
 });
