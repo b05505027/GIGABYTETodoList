@@ -1,5 +1,6 @@
 # TodoList in Vue
 
+![App Preview](./cover.png)
 This is a **TodoList** desktop application built with **Vue 3** and **Electron**.
 
 ---
